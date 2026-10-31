@@ -1,0 +1,67 @@
+/* Only the portal: the workspaces and cinematic keep their existing styles. */
+.platform.portal {
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  align-items: center;
+  justify-items: center;
+  gap: clamp(1rem, 2.2svh, 2rem);
+  padding: clamp(1.25rem, 3.5svh, 2.75rem) clamp(1.25rem, 4vw, 4rem);
+  color: #fff3d9;
+  background: #071116 url('/portal/bg.jpg') center center / cover no-repeat;
+}
+.portal-masthead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  width: 100%;
+  font-family: Georgia, 'Times New Roman', serif;
+  text-shadow: 0 2px 5px #000;
+}
+.portal-brand { font-size: clamp(1.25rem, 1.8vw, 1.8rem); letter-spacing: .015em; }
+.portal-replay { font-size: clamp(.9rem, 1.2vw, 1.1rem); font-style: italic; text-underline-offset: .3em; }
+.portal-navigation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(.4rem, 1.4svh, 1.25rem);
+  width: min(65vw, 70svh, 860px);
+  padding-block: 1rem;
+}
+.portal-link {
+  display: block;
+  width: 100%;
+  flex: none;
+  border-radius: .25rem;
+  line-height: 0;
+  transition: transform 220ms ease, filter 220ms ease;
+  transform-origin: center;
+}
+.portal-link img { display: block; width: 100%; height: auto; }
+.portal-link:hover { transform: scale(1.025); filter: drop-shadow(0 0 12px #efe2ff55); }
+.platform.portal a:focus-visible { outline: 2px solid #fff3d9; outline-offset: 7px; }
+.portal-link:focus-visible { filter: drop-shadow(0 0 12px #efe2ff55); }
+.portal .slogan {
+  max-width: 740px;
+  margin: 0;
+  text-align: center;
+  font: italic clamp(.85rem, 1.2vw, 1.1rem)/1.6 Georgia, 'Times New Roman', serif;
+  text-wrap: balance;
+  text-shadow: 0 2px 5px #000, 0 0 12px #000;
+}
+.portal .asset-missing { display: block; padding: 1.5rem; border: 1px solid #fff3d9; font: 1rem/1.5 Georgia, serif; }
+@media (max-width: 700px) {
+  .platform.portal { gap: 1.25rem; padding: 1.5rem 6vw; }
+  .portal-navigation { width: min(88vw, 76svh); gap: clamp(.25rem, 1svh, .75rem); }
+  .portal .slogan { max-width: 34rem; }
+}
+@media (max-height: 500px) {
+  .portal-navigation { width: min(68vw, 470px); gap: .25rem; }
+  .platform.portal { gap: .75rem; padding-block: 1.25rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .portal-link { transition: none; }
+  .portal-link:hover { transform: none; }
+}

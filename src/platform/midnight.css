@@ -1,0 +1,56 @@
+/* Midnight Séance: scoped to productive workspaces, never the portal or intro. */
+.workspace {
+  --purple:#533777; --plum:#362541; --yellow:#e9c98a;
+  --cream:#f8f0e4; --lavender:#a985d2; --midnight:#21132f;
+  color:#362541; background:#f8f0e4;
+}
+.workspace .workspace-bar { background:#21132f; color:#fff4e4; border-bottom:1px solid #e9c98a30; padding-block:24px; }
+.workspace .brand { font-size:27px; letter-spacing:-.6px; }
+.workspace .brand span { color:#e9c98a; }
+.workspace .workspace-bar nav a { padding-block:5px; border-bottom:2px solid transparent; }
+.workspace .workspace-bar nav a:hover { color:#cfb3ed; }
+.workspace .workspace-bar nav [aria-current] { color:#fff4e4; border-color:#e9c98a; }
+.workspace .workspace-heading { background:#21132f; color:#fff4e4; padding-block:clamp(42px,6vw,82px) clamp(42px,5vw,68px); }
+.workspace .workspace-heading .kicker { color:#e9c98a; font-weight:500; letter-spacing:.18em; margin:0 0 26px; }
+.workspace .workspace-heading h1 { color:#fff4e4; font-size:clamp(43px,5.5vw,80px); font-weight:400; line-height:1.06; max-width:1100px; }
+.workspace .workspace-heading>p:last-child { color:#e1d4e9; font-size:clamp(16px,1.5vw,19px); margin:25px 0 0; line-height:1.6; }
+.workspace .workspace-content { padding-top:38px; }
+.workspace .panel { background:#fff9f0; border-color:#a985d24d; border-radius:8px; padding:30px; }
+.workspace .section-label { color:#533777; margin-bottom:24px; }
+.workspace .section-label span { color:#856533; }
+.workspace :is(input,textarea,select) { background:#fffaf3; color:#362541; border-color:#a985d28c; }
+.workspace textarea { padding:18px; line-height:1.65; }
+.workspace :is(button,.button) { color:#362541; border-color:#a985d299; }
+.workspace :is(button,.button):hover { background:#eadcf3; }
+.workspace .primary { color:#fff4e4; background:#533777; border-color:#533777; font-weight:600; }
+.workspace .primary:hover { background:#43285f; color:#fff4e4; }
+.workspace :is(button,a,input,textarea,select):focus-visible { outline-color:#533777; }
+.workspace .workspace-bar a:focus-visible { outline-color:#e9c98a; }
+.workspace .templates { gap:14px; }
+.workspace .templates button { background:#eee4f3; border-color:#a985d27a; padding:16px; line-height:1.5; min-height:100px; }
+.workspace .templates button:hover { background:#e1cfef; border-color:#8462a7; }
+.workspace .templates button span { color:#533777; opacity:1; font-weight:600; letter-spacing:.1em; }
+.workspace .connections { color:#584361; }
+.workspace .notice { background:#e9c98a25; border-color:#9a7537; color:#513c28; }
+.workspace .check-row,.workspace .activity li { border-color:#a985d233; }
+.workspace :is(progress,.check-row input) { accent-color:#533777; }
+.workspace .task-graph { background:#f0e7f2; }
+.workspace .task-node { color:#362541; }
+.workspace .react-flow__node-default { background:#fff9f0; border-color:#533777!important; box-shadow:0 4px 14px #21132f0d; }
+.workspace .react-flow__node-default:has(.status-failed) { border-color:#8c372f!important; }
+.workspace .react-flow__edge-path { stroke:#8462a7!important; }
+.workspace .resource-grid article,.workspace fieldset { border-color:#a985d25c; }
+.workspace .activity time { color:#624c70; }
+.workspace .empty-state { padding-block:65px; }
+.workspace .empty-state>span { color:#856533; }
+.workspace .status-waiting { background:#eaddf2; color:#533777; }
+.workspace .status-running { background:#f1deb8; color:#4b3214; }
+@media(max-width:800px) {
+  .workspace .workspace-bar { padding-block:20px; }
+  .workspace .workspace-heading { padding-top:42px; }
+  .workspace .workspace-heading h1 { font-size:clamp(40px,9vw,64px); letter-spacing:-1.7px; }
+  .workspace .workspace-heading .kicker { font-size:10px; line-height:1.8; }
+  .workspace .panel { padding:22px; }
+  .workspace .templates { gap:12px; }
+  .workspace .templates button { padding:14px; min-height:100px; }
+}

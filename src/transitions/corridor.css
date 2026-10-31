@@ -1,0 +1,9 @@
+.corridor-transition { position:fixed; inset:0; z-index:100; background:#100b18; color:#fff4e4; overflow:hidden; isolation:isolate; }
+.corridor-transition .corridor-canvas { position:absolute!important; inset:0; width:100%; height:100%; }
+.corridor-veil { position:absolute; inset:0; background:#21132f; opacity:1; pointer-events:none; }
+.corridor-caption { position:absolute; top:clamp(24px,4svh,48px); left:6%; right:6%; text-align:center; font:italic clamp(18px,2vw,25px)/1.5 Georgia,serif; text-shadow:0 2px 8px #000; pointer-events:none; }
+.corridor-caption small { display:block; margin-top:6px; font:11px/1.5 Arial,sans-serif; color:#e9c98a; letter-spacing:.08em; }
+.corridor-skip { position:absolute; right:6%; bottom:clamp(24px,5svh,50px); background:#21132fe8; border:1px solid #a985d2; border-radius:4px; color:#fff4e4; font:14px/1.4 Arial,sans-serif; letter-spacing:0; padding:13px 20px; min-height:44px; }
+.corridor-skip:hover { background:#533777; }
+.corridor-skip:focus-visible { outline:3px solid #e9c98a; outline-offset:5px; }
+.corridor-skip span { margin-left:15px; }
