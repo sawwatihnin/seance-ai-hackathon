@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-Open the localhost URL printed by Vite. Production: `npm run build`, then `npm run preview`. Node 20.19+ or 22.12+ is required by Vite. No API keys, backend, remote fonts, or audio downloads are used.
+Open the localhost URL printed by Vite. Production: `npm run build`, then `npm run preview`. Node 20.19+ or 22.12+ is required by Vite. The cinematic itself uses no API keys, backend, remote fonts, or audio downloads; the Seance.AI workspaces it leads into do (see below).
 
 ## The film
 
@@ -17,9 +17,9 @@ Open the localhost URL printed by Vite. Production: `npm run build`, then `npm r
 - 3–7 seconds: accelerating world-space crawl with skeletal motion and body sway.
 - 7–10 seconds: upward lunge, forward pitch about the fitted center of mass, underside approach, impact shake, blackout.
 - 10–15 seconds: warm Ouija reveal and camera move into an overhead three-quarter composition.
-- At 15 seconds: camera and imported animation poses freeze; candle flicker and ambient dust remain alive. The Ouija board stays as the landing scene.
+- At 15 seconds: camera and imported animation poses freeze; candle flicker and ambient dust remain alive. After a one-second exit fade, the app opens `/portal`.
 
-Skip Intro seeks directly to the final scene. Replay Intro rebuilds the fifteen-second GSAP timeline. Reduced-motion preferences bypass the cinematic. Layout and field of view adapt to portrait screens. No local sound assets were supplied, so the experience is intentionally silent.
+Skip Intro seeks directly to the final scene and then opens the portal. Replay Intro, available during the exit fade, rebuilds the fifteen-second GSAP timeline. Reduced-motion preferences bypass the cinematic. Layout and field of view adapt to portrait screens. No local sound assets were supplied, so the experience is intentionally silent.
 
 ## Asset-specific handling
 

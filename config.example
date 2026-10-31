@@ -5,9 +5,14 @@ GOOGLE_MAPS_API_KEY=
 YOUTUBE_API_KEY=
 BRAVE_SEARCH_API_KEY=
 OPENALEX_API_KEY=
+# Maritime exec needs a key with the deploy scope.
 MARITIME_API_KEY=
 MARITIME_AGENT_ID=
 ARDUINO_BRIDGE_TOKEN=
+# Read by hardware/bridge.py from its own environment, not from this file.
+ARDUINO_PORT=
+SEANCE_URL=http://127.0.0.1:3001
 PORT=3001
 HOST=127.0.0.1
+FRONTEND_PORT=5173
 DATA_DIR=.seance-data

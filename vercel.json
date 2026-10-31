@@ -3,9 +3,22 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "rewrites": [
-    { "source": "/portal/:path*", "destination": "/index.html" },
-    { "source": "/community/:path*", "destination": "/index.html" },
-    { "source": "/education/:path*", "destination": "/index.html" },
-    { "source": "/business/:path*", "destination": "/index.html" }
-  ]
+    {
+      "source": "/portal",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/community",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/education",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/business",
+      "destination": "/index.html"
+    }
+  ],
+  "trailingSlash": false
 }
