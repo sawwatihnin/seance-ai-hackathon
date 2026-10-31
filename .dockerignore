@@ -1,0 +1,16 @@
+.git
+.env
+.env.*
+.seance-data
+node_modules
+dist
+test-results
+playwright-report
+tests
+hardware
+*.pem
+*.key
+*.glb
+*.png
+*.jpg
+*.txt
