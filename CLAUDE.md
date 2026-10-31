@@ -6,7 +6,7 @@ An open source shared AI workspace. Today, teammates each work in their own Chat
 
 ## Current focus
 
-- **Community is the only active workspace and the hackathon demo.** Education and Business were removed on purpose and are planned to return as tabs. Do not bring them back until the team says so. Their code is in Git history.
+- **Community is the hackathon demo.** All three workspaces stay in the app with the shared Midnight theme and corridor transitions, but the demo only enters Community, so put demo work there.
 - **Demo goal:** several signed-in people join one Community workspace through an invite code and see the same plans, results, and context.
 - **Model:** Gemma 4 (`gemma-4-26b-a4b-it`) through the Gemini API, for the hackathon only.
 
@@ -14,7 +14,7 @@ An open source shared AI workspace. Today, teammates each work in their own Chat
 
 Not built yet. The app is currently single-user and runs on localhost, with no accounts, sessions, workspaces, or invites.
 
-Maritime is the intended host, but it is not set up: there is no account, API key, or agent, and the CLI is not installed. `server/maritime.mjs` only sends individual tasks to an existing agent, and has never run against a real one.
+Maritime is the intended host, and the root `Dockerfile` is ready for it. `server/maritime.mjs` is separate: it only sends individual tasks to an existing agent, and has never run against a real one.
 
 What Maritime provides (from https://maritime.sh/docs, checked 2026-10-31):
 
@@ -28,13 +28,11 @@ What it does not document, so we must build it:
 - Shared context across people or agents. Each end user gets a separate agent, and agents do not share a volume.
 - A database. Bring your own.
 
-Planned approach: deploy this app as one shared Maritime agent, with workspace state in `/data`, and put our own invite codes and sessions in front of it. Hosting needs a Dockerfile, a `/health` endpoint, a bind to `0.0.0.0:$PORT`, and `DATA_DIR=/data`. Add access control before giving the server a public URL, because anyone who can reach it can spend the Gemini quota.
+Planned approach: deploy this app as one shared Maritime agent, with workspace state in `/data`, and put our own invite codes and sessions in front of it. Add access control before making the URL public, because anyone who can reach it can spend the Gemini quota. See `IMPLEMENTATION.md` for deployment steps. `vercel.json` only hosts the static frontend, so the API does not work there.
 
 ## Future scope
 
 - **Sign in with ChatGPT:** let people use their existing model provider instead of Gemma. OpenAI's program is limited to selected partners and eligible tools as of October 2026, so confirm access in OpenAI's developer docs before building. A user-supplied API key is the fallback.
-- Bring Education and Business back as workspace tabs.
-- Connect the horror GLB models in the repository root, which no scene uses yet.
 
 ## Working in this repo
 
