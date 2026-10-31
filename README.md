@@ -60,3 +60,8 @@ Source forest bounds: minimum (-14.34909, -0.31165, -4.33192), maximum (4.88705,
 Forest credit: “a forest (3) with a road at night for game” by **dasy444**, https://sketchfab.com/3d-models/a-forest-3-with-a-road-at-night-for-game-61f8c7817fe6457fb26e4814cfc48a3f — **CC BY 4.0**. Runtime changes: fitting, foliage thinning, material grading, static batching, and lighting. Preserve this credit when redistributing.
 
 Forest update verification: production build passes; browser frames at 4s, 9.2s, and 12s check forest composition, underside approach, and the clean Ouija transition. Mobile performance remains unverified; the forest adds a 28 MB download.
+
+
+## Seance.AI portal and workspaces
+
+See [IMPLEMENTATION.md](IMPLEMENTATION.md) for setup, API credentials, Maritime execution, Arduino, validation, and known blockers. Run `npm run server` alongside `npm run dev` for the workspace API.

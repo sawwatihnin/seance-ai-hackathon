@@ -29,6 +29,6 @@ function Film({run,reduced,onReady,onComplete,veil,progress}:{run:number;reduced
 function Loading(){const {progress}=useProgress();return <div className="loading" role="status"><div className="sigil">✧</div><p>PREPARING THE SÉANCE</p><span>{Math.round(progress)}%</span></div>}
 export function IntroExperience(props:{run:number;reduced:boolean;onReady:()=>void;onComplete:()=>void}){
  const veil=useRef<HTMLDivElement>(null);const progress=useRef<HTMLDivElement>(null);
- return <><Canvas dpr={[1,1.75]} camera={{position:[0,1.5,9],fov:48,near:.03,far:180}} gl={{antialias:true,powerPreference:'high-performance'}} fallback={<div className="loading">This experience requires WebGL.</div>}><Suspense fallback={null}><Film {...props} veil={veil} progress={progress}/></Suspense></Canvas><div ref={veil} className="veil"/><Loading/><div className="film-progress"><div ref={progress}/></div></>;
+ return <><Canvas dpr={[1,1.75]} camera={{position:[0,1.5,9],fov:48,near:.03,far:180}} gl={{antialias:true,powerPreference:'high-performance'}} fallback={<div className="loading webgl-fallback"><p>This cinematic requires a WebGL-enabled browser.</p><a href="/portal">Enter the portal</a></div>}><Suspense fallback={null}><Film {...props} veil={veil} progress={progress}/></Suspense></Canvas><div ref={veil} className="veil"/><Loading/><div className="film-progress"><div ref={progress}/></div></>;
 }
 useGLTF.preload('/models/spooky_house_halloween.glb',true,true,configureModelLoader);useGLTF.preload('/models/lowpoly_ouija_board_with_props.glb',true,true,configureModelLoader);

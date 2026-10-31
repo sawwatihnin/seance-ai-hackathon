@@ -1,0 +1,5 @@
+import {useState} from 'react';
+import {Link} from 'react-router-dom';
+const entries=[['community','community(1).png'],['education','education.png'],['business','business.png']];
+function PortalImage({name,file}:{name:string;file:string}){const [failed,setFailed]=useState(false);return <Link to={'/'+name} aria-label={`Enter ${name} workspace`} className="portal-link">{failed?<span className="asset-missing">{file} — navigation artwork needed</span>:<img src={'/portal/'+file} alt="" onError={()=>setFailed(true)}/>}</Link>}
+export default function Portal(){return <div className="platform portal"><Link className="portal-home" to="/">Seance.AI / replay the séance</Link><span className="star star-a" aria-hidden="true">✦</span><nav aria-label="Choose your workspace">{entries.map(([name,file])=><PortalImage key={name} name={name} file={file}/>)}</nav><span className="star star-b" aria-hidden="true">✦</span><p className="slogan">connecting the world of the dead (developers) &amp; the world of the living (literally anyone else)</p></div>}
