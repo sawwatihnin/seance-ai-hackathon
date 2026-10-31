@@ -6,6 +6,17 @@ Node 22.12+ recommended. Run `npm ci`, copy `config.example` to `.env` and fill 
 
 `/` retains the original cinematic. Its completion callback begins a one-second exit fade while the scene stays mounted, then opens `/portal`. Reduced motion skips the timeline as the original implementation did. `/community`, `/education`, `/business` share a goal → plan → dependency graph → run → result flow. Browser history and deep links work. The original models, lighting, scene components, and timeline are unchanged; the only cinematic edit is a portal link in the WebGL fallback.
 
+## Deploy to Maritime
+
+The root `Dockerfile` builds the frontend and serves it with the API on Maritime's `PORT`, answers `/health`, and stores runs in `/data`. Deploy it from the repository rather than choosing a harness:
+
+```sh
+maritime create seance-ai --repo https://github.com/sawwatihnin/seance-ai-hackathon --branch main
+maritime env set seance-ai GEMINI_API_KEY=<key> --reload
+```
+
+Add `GOOGLE_MAPS_API_KEY` the same way for live Community places. Never put keys in the repository or the image. The agent stays private by default. Only run `maritime agents url visibility <agent-id> public` (verified email required) once invite-code access exists, because the app has no access control yet and anyone with the URL could spend the Gemini quota. `vercel.json` serves only the static frontend, so the API does not work there.
+
 ## Required artwork
 
 The portal uses the blackletter wordmarks `cm2.png`, `edu.png`, and `busi.png` over the `bg.jpg` forest, all in `public/portal/`. These images are the actual clickable navigation; the earlier `community(1).png`, `education.png`, and `business.png` are no longer used. The horror GLBs in the repository root (`corridor`, `creeping_flesh_creature`, `creepy_scarecrow`, `nurse_of_horror`) are not connected to any scene. The separate purple reference image has not been supplied, so exact reference comparison remains pending.
@@ -46,4 +57,4 @@ This is a single-user localhost application, without authentication, team collab
 
 ## Verification results in this checkout
 
-Production TypeScript/build passed; Vite reports large bundles. Seventeen engine/export/Maritime client tests passed. Six production browser checks passed (routes/history/PNG navigation/mobile; missing-key API behavior; real three-model cinematic completion; graph/checklist/backend review persistence using a clearly named test fixture isolated in temporary storage; origin/credential/review guards; no-WebGL error fallback navigation). One full plan-to-completion HTTP run passed through the real server and LangGraph with Gemini responses stubbed; its Open Library and OpenAlex steps used the live APIs and each returned six records. With a real Gemini key, a Community run completed live in 72 seconds and Business completed in 87 seconds. Live Gemma output is not fully reliable: the last three-workspace run, before the retry for invalid model output was added, saw Education and Community fail on invalid responses, and the root cause is unconfirmed. Education has not been rerun since, and a failed run must be replanned. Maritime, Places, YouTube and Brave live execution remain unverified without credentials; Arduino is unverified without hardware.
+Production TypeScript/build passed; Vite reports large bundles. Seventeen engine/export/Maritime client tests passed. Fourteen production browser checks passed, including the corridor and portal suites, and the Docker image built and served the app locally with a separate `PORT` and `/data` volume; it has not yet run on Maritime. The original browser checks cover (routes/history/PNG navigation/mobile; missing-key API behavior; real three-model cinematic completion; graph/checklist/backend review persistence using a clearly named test fixture isolated in temporary storage; origin/credential/review guards; no-WebGL error fallback navigation). One full plan-to-completion HTTP run passed through the real server and LangGraph with Gemini responses stubbed; its Open Library and OpenAlex steps used the live APIs and each returned six records. With a real Gemini key, a Community run completed live in 72 seconds and Business completed in 87 seconds. Live Gemma output is not fully reliable: the last three-workspace run, before the retry for invalid model output was added, saw Education and Community fail on invalid responses, and the root cause is unconfirmed. Education has not been rerun since, and a failed run must be replanned. Maritime, Places, YouTube and Brave live execution remain unverified without credentials; Arduino is unverified without hardware.
