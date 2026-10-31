@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.DS_Store
+*.local
+*.tsbuildinfo
+
+.env
+.env.*
+.venv/
+venv/
+__pycache__/
+.cache/
+*.pem
+*.key

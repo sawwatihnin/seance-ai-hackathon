@@ -1,0 +1,258 @@
+
+> the-house-beneath@1.0.0 inspect
+> node scripts/inspect-models.mjs
+
+samples spooky_house_halloween [{"t":0,"min":[-1.2956473275142328,-0.7419392654814416,-1.1792675413607514],"max":[1.175589319521088,1.1694020020537526,1.0311389622915494]},{"t":1,"min":[-1.3391015275365694,-0.7419392654814416,-1.151642160563594],"max":[1.1723755267644385,1.175893565616706,1.0289255613507065]},{"t":3,"min":[-1.2976983321867555,-0.7419392654814416,-1.0680018052737623],"max":[1.1941991726824293,1.2210817424274598,1.0219127253843556]},{"t":5,"min":[-1.2777394689102233,-0.7419392654814416,-1.040862493703613],"max":[1.1976791872708281,1.211561458733744,1.0190350805821313]},{"t":7,"min":[-1.2974019924305005,-0.7419392654814416,-1.1722256886470257],"max":[1.0668497415383011,1.171834040148472,1.0301538428719614]}]
+{
+  "name": "spooky_house_halloween",
+  "min": {
+    "x": -1.2956474333968104,
+    "y": -0.7419392654814416,
+    "z": -1.1792672310503172
+  },
+  "max": {
+    "x": 1.1755892404918342,
+    "y": 1.1694020080273684,
+    "z": 1.0311390305407206
+  },
+  "center": {
+    "x": -0.06002909645248811,
+    "y": 0.21373137127296338,
+    "z": -0.07406410025479826
+  },
+  "size": {
+    "x": 2.4712366738886447,
+    "y": 1.91134127350881,
+    "z": 2.2104062615910376
+  },
+  "meshes": [
+    {
+      "name": "Object_7",
+      "skin": true,
+      "bones": 46
+    },
+    {
+      "name": "Object_8",
+      "skin": true,
+      "bones": 46
+    }
+  ],
+  "animations": [
+    {
+      "name": "ArmatureAction",
+      "duration": 7.5,
+      "tracks": [
+        "Bone_47.quaternion",
+        "Bone_47.scale",
+        "HouseLeft_23.position",
+        "HouseLeft_23.quaternion",
+        "HouseLeft_23.scale",
+        "HouseArmLeft1_22.position",
+        "HouseArmLeft1_22.quaternion",
+        "HouseArmLeft1_22.scale",
+        "HouseArmLeft2_21.position",
+        "HouseArmLeft2_21.quaternion",
+        "HouseArmLeft2_21.scale",
+        "HouseArmLeft3_20.position",
+        "HouseArmLeft3_20.quaternion",
+        "HouseArmLeft3_20.scale",
+        "HouseArmLeft4_19.position",
+        "HouseArmLeft4_19.quaternion",
+        "HouseArmLeft4_19.scale",
+        "LeftMiddleFinger1_6.position",
+        "LeftMiddleFinger1_6.quaternion",
+        "LeftMiddleFinger1_6.scale",
+        "LeftMiddleFinger2_5.position",
+        "LeftMiddleFinger2_5.quaternion",
+        "LeftMiddleFinger2_5.scale",
+        "LeftMiddleFinger3_4.position",
+        "LeftMiddleFinger3_4.quaternion",
+        "LeftMiddleFinger3_4.scale",
+        "LeftMiddleFinger4_3.position",
+        "LeftMiddleFinger4_3.quaternion",
+        "LeftMiddleFinger4_3.scale",
+        "LeftRingFinger1_10.position",
+        "LeftRingFinger1_10.quaternion",
+        "LeftRingFinger1_10.scale",
+        "LeftRingFinger2_9.position",
+        "LeftRingFinger2_9.quaternion",
+        "LeftRingFinger2_9.scale",
+        "LeftRingFinger3_8.position",
+        "LeftRingFinger3_8.quaternion",
+        "LeftRingFinger3_8.scale",
+        "LeftRingFinger4_7.position",
+        "LeftRingFinger4_7.quaternion",
+        "LeftRingFinger4_7.scale",
+        "LeftIndexFinger1_14.position",
+        "LeftIndexFinger1_14.quaternion",
+        "LeftIndexFinger1_14.scale",
+        "LeftIndexFinger2_13.position",
+        "LeftIndexFinger2_13.quaternion",
+        "LeftIndexFinger2_13.scale",
+        "LeftIndexFinger3_12.position",
+        "LeftIndexFinger3_12.quaternion",
+        "LeftIndexFinger3_12.scale",
+        "LeftIndexFinger4_11.position",
+        "LeftIndexFinger4_11.quaternion",
+        "LeftIndexFinger4_11.scale",
+        "LeftThumb1_18.position",
+        "LeftThumb1_18.quaternion",
+        "LeftThumb1_18.scale",
+        "LeftThumb2_17.position",
+        "LeftThumb2_17.quaternion",
+        "LeftThumb2_17.scale",
+        "LeftThumb3_16.position",
+        "LeftThumb3_16.quaternion",
+        "LeftThumb3_16.scale",
+        "LeftThumb4_15.position",
+        "LeftThumb4_15.quaternion",
+        "LeftThumb4_15.scale",
+        "HouseRight_44.position",
+        "HouseRight_44.quaternion",
+        "HouseRight_44.scale",
+        "HouseArmRight1_43.position",
+        "HouseArmRight1_43.quaternion",
+        "HouseArmRight1_43.scale",
+        "HouseArmRight2_42.position",
+        "HouseArmRight2_42.quaternion",
+        "HouseArmRight2_42.scale",
+        "HouseArmRight3_41.position",
+        "HouseArmRight3_41.quaternion",
+        "HouseArmRight3_41.scale",
+        "HouseArmRight4_40.position",
+        "HouseArmRight4_40.quaternion",
+        "HouseArmRight4_40.scale",
+        "RightMiddleFinger1_27.position",
+        "RightMiddleFinger1_27.quaternion",
+        "RightMiddleFinger1_27.scale",
+        "RightMiddleFinger2_26.position",
+        "RightMiddleFinger2_26.quaternion",
+        "RightMiddleFinger2_26.scale",
+        "RightMiddleFinger3_25.position",
+        "RightMiddleFinger3_25.quaternion",
+        "RightMiddleFinger3_25.scale",
+        "RightMiddleFinger4_24.position",
+        "RightMiddleFinger4_24.quaternion",
+        "RightMiddleFinger4_24.scale",
+        "RightIndexFinger1_31.position",
+        "RightIndexFinger1_31.quaternion",
+        "RightIndexFinger1_31.scale",
+        "RightIndexFinger2_30.position",
+        "RightIndexFinger2_30.quaternion",
+        "RightIndexFinger2_30.scale",
+        "RightIndexFinger3_29.position",
+        "RightIndexFinger3_29.quaternion",
+        "RightIndexFinger3_29.scale",
+        "RightIndexFinger4_28.position",
+        "RightIndexFinger4_28.quaternion",
+        "RightIndexFinger4_28.scale",
+        "RightRingFinger1_35.position",
+        "RightRingFinger1_35.quaternion",
+        "RightRingFinger1_35.scale",
+        "RightRingFinger2_34.position",
+        "RightRingFinger2_34.quaternion",
+        "RightRingFinger2_34.scale",
+        "RightRingFinger3_33.position",
+        "RightRingFinger3_33.quaternion",
+        "RightRingFinger3_33.scale",
+        "RightRingFinger4_32.position",
+        "RightRingFinger4_32.quaternion",
+        "RightRingFinger4_32.scale",
+        "RightThumb1_39.position",
+        "RightThumb1_39.quaternion",
+        "RightThumb1_39.scale",
+        "RightThumb2_38.position",
+        "RightThumb2_38.quaternion",
+        "RightThumb2_38.scale",
+        "RightThumb3_37.position",
+        "RightThumb3_37.quaternion",
+        "RightThumb3_37.scale",
+        "RightThumb4_36.position",
+        "RightThumb4_36.quaternion",
+        "RightThumb4_36.scale",
+        "RightEyebrow_45.position",
+        "RightEyebrow_45.quaternion",
+        "RightEyebrow_45.scale",
+        "EyeBrowLeft_46.position",
+        "EyeBrowLeft_46.quaternion",
+        "EyeBrowLeft_46.scale"
+      ]
+    }
+  ]
+}
+prop ouija_board_Material_0 [ -0.24839043419680507, 0.0013585734616290987, -0.18608863290968533 ] [ 0.23273855285185818, 0.00848645925540368, 0.17030317794318406 ]
+prop ouija_board_part_Material_0 [ 0.013843008846663243, 0.00818902732987746, -0.08820790365865051 ] [ 0.11229332695314109, 0.01841825370284169, 0.04097376523591874 ]
+prop skull_with_diamond_Material002_0 [ 0.17507827386440566, 0.00014771309670796873, -0.5849916791527175 ] [ 0.3784846730826744, 0.2257733455610239, -0.27494640276251003 ]
+prop skull_Material002_0 [ -0.38832274139901185, 0.00014774806617007252, -0.5849915676386046 ] [ -0.18491634218074304, 0.225773380530486, -0.2749462912483969 ]
+prop candle001_Material002_0 [ -0.08809780295257914, 0.0006483116188884461, -0.36452834523366806 ] [ 0.008775778351718118, 0.10373780609980286, -0.26653732495630866 ]
+prop candle002_Material002_0 [ 0.018149313008005638, 0.0006620837991527517, -0.36210194516059513 ] [ 0.11274060233267508, 0.18361289254504215, -0.26782614176721975 ]
+prop candle_Material002_0 [ -0.03464962569098091, 0.0006768820392948349, -0.4536801697416734 ] [ 0.05523874050036073, 0.2221911340006538, -0.35627569585905816 ]
+prop dagger_and_part001_Cylinder008_Material002_0 [ 0.32627626887670813, 0.000738074857622362, -0.17746948201364499 ] [ 0.44713417514236, 0.025302737294786576, 0.16226334510482296 ]
+samples lowpoly_ouija_board_with_props [{"t":0,"min":[-0.38832274139901185,0.00014771309670796873,-0.5849916791527175],"max":[0.44713417514236,0.225773380530486,0.17030317794318406]},{"t":1,"min":[-0.38832274139901185,0.00014771309670796873,-0.5849916791527175],"max":[0.44713417514236,0.225773380530486,0.17030317794318406]},{"t":3,"min":[-0.38832274139901185,0.00014771309670796873,-0.5849916791527175],"max":[0.44713417514236,0.225773380530486,0.17030317794318406]},{"t":5,"min":[-0.38832274139901185,0.00014771309670796873,-0.5849916791527175],"max":[0.44713417514236,0.225773380530486,0.17030317794318406]},{"t":7,"min":[-0.38832274139901185,0.00014771309670796873,-0.5849916791527175],"max":[0.44713417514236,0.225773380530486,0.17030317794318406]}]
+{
+  "name": "lowpoly_ouija_board_with_props",
+  "min": {
+    "x": -0.38832274139901185,
+    "y": 0.00014771309670796873,
+    "z": -0.5849916791527175
+  },
+  "max": {
+    "x": 0.44713417514236,
+    "y": 0.225773380530486,
+    "z": 0.17030317794318406
+  },
+  "center": {
+    "x": 0.029405716871674065,
+    "y": 0.11296054681359699,
+    "z": -0.20734425060476674
+  },
+  "size": {
+    "x": 0.8354569165413719,
+    "y": 0.22562566743377804,
+    "z": 0.7552948570959016
+  },
+  "meshes": [
+    {
+      "name": "ouija_board_Material_0",
+      "skin": false
+    },
+    {
+      "name": "ouija_board_part_Material_0",
+      "skin": false
+    },
+    {
+      "name": "skull_with_diamond_Material002_0",
+      "skin": false
+    },
+    {
+      "name": "skull_Material002_0",
+      "skin": false
+    },
+    {
+      "name": "candle001_Material002_0",
+      "skin": false
+    },
+    {
+      "name": "candle002_Material002_0",
+      "skin": false
+    },
+    {
+      "name": "candle_Material002_0",
+      "skin": false
+    },
+    {
+      "name": "dagger_and_part001_Cylinder008_Material002_0",
+      "skin": false
+    }
+  ],
+  "animations": [
+    {
+      "name": "ouija board part|ouija board partAction",
+      "duration": 23.440000534057617,
+      "tracks": [
+        "ouija_board_part.position",
+        "ouija_board_part.quaternion"
+      ]
+    }
+  ]
+}
