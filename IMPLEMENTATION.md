@@ -8,7 +8,7 @@ Node 22.12+ recommended. Run `npm ci`, copy `config.example` to `.env` and fill 
 
 ## Required artwork
 
-The original transparent PNGs are installed in `public/portal/`. `community.png` from the supplied Desktop project is copied as `community(1).png`; education and business retain their names. These images are the actual clickable navigation. The separate purple reference image has not been supplied, so exact reference comparison remains pending.
+The portal uses the blackletter wordmarks `cm2.png`, `edu.png`, and `busi.png` over the `bg.jpg` forest, all in `public/portal/`. These images are the actual clickable navigation; the earlier `community(1).png`, `education.png`, and `business.png` are no longer used. The horror GLBs in the repository root (`corridor`, `creeping_flesh_creature`, `creepy_scarecrow`, `nurse_of_horror`) are not connected to any scene. The separate purple reference image has not been supplied, so exact reference comparison remains pending.
 
 ## Provider configuration
 
