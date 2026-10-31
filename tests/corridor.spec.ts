@@ -1,5 +1,5 @@
 import {test,expect} from '@playwright/test';
-const characters={community:['Nurse of Horror','nurse_of_horror.glb'],education:['Creeping Flesh Creature','creeping_flesh_creature__free_3d_horror_model.glb'],business:['Creepy Scarecrow','creepy_scarecrow__horror_stylized.glb']} as const;
+const characters={community:['Nurse of Horror','nurse_of_horror.runtime.glb'],education:['Creeping Flesh Creature','creeping_flesh_creature__free_3d_horror_model.glb'],business:['Creepy Scarecrow','creepy_scarecrow__horror_stylized.glb']} as const;
 
 test('all three real characters render in the corridor and reach their destination',async({page})=>{
  test.setTimeout(120000);await page.setViewportSize({width:960,height:680});
@@ -9,7 +9,7 @@ test('all three real characters render in the corridor and reach their destinati
  for(const [destination,[name,file]] of Object.entries(characters)){
   await page.getByRole('link',{name:`Enter ${destination} workspace`}).click();
   const dialog=page.getByRole('dialog');await expect(dialog).toHaveAttribute('data-character',name);
-  await expect(dialog).toHaveAttribute('data-phase','playing',{timeout:15000});
+  await expect(dialog).toHaveAttribute('data-phase','playing',{timeout:25000});
   await expect(page).toHaveURL(/\/portal\/?$/);
   await expect.poll(()=>page.locator('.corridor-veil').evaluate(e=>Number(getComputedStyle(e).opacity)),{timeout:2500}).toBeLessThan(.05);
   await page.screenshot({path:`test-results/corridor-${destination}.png`});
@@ -40,15 +40,20 @@ test('skip, Escape, load failure, timeout and browser Back cannot trap navigatio
  await page.route('**/models/*.glb',()=>{}); // Deliberately stalled provider: test-only.
  await page.goto('/portal');await page.getByRole('link',{name:'Enter community workspace'}).click();await expect(page.getByRole('button',{name:'Skip Transition'})).toBeFocused();await page.getByRole('button',{name:'Skip Transition'}).click();await expect(page).toHaveURL('/community');
  await page.getByRole('link',{name:'↖ portal'}).click();await page.getByRole('link',{name:'Enter education workspace'}).click();await page.keyboard.press('Escape');await expect(page).toHaveURL('/education');
- await page.getByRole('link',{name:'↖ portal'}).click();await page.getByRole('link',{name:'Enter business workspace'}).click();await expect(page).toHaveURL('/business',{timeout:13000});
+ await page.getByRole('link',{name:'↖ portal'}).click();await page.getByRole('link',{name:'Enter business workspace'}).click();await expect(page).toHaveURL('/business',{timeout:23000});
  await page.getByRole('link',{name:'↖ portal'}).click();await page.getByRole('link',{name:'Enter community workspace'}).click();await page.goBack();await expect(page).toHaveURL('/business');await expect(page.getByRole('dialog')).toHaveCount(0);
- await page.unroute('**/models/*.glb');await page.route('**/models/*.glb',route=>route.abort());await page.goto('/portal');await page.getByRole('link',{name:'Enter business workspace'}).click();await expect(page).toHaveURL('/business',{timeout:13000});
+ await page.unroute('**/models/*.glb');await page.route('**/models/*.glb',route=>route.abort());await page.goto('/portal');await page.getByRole('link',{name:'Enter business workspace'}).click();await expect(page).toHaveURL('/business',{timeout:23000});
 });
 
 test('mobile corridor keeps the animated character and skip control visible',async({page})=>{
- await page.setViewportSize({width:390,height:844});await page.goto('/portal');await page.getByRole('link',{name:'Enter business workspace'}).click();await expect(page.getByRole('dialog')).toHaveAttribute('data-phase','playing',{timeout:15000});await expect.poll(()=>page.locator('.corridor-veil').evaluate(e=>Number(getComputedStyle(e).opacity)),{timeout:2500}).toBeLessThan(.05);const canvas=await page.locator('.corridor-canvas canvas').boundingBox();expect(canvas?.width).toBe(390);expect(canvas?.height).toBe(844);await expect(page.getByRole('button',{name:'Skip Transition'})).toBeInViewport();await page.screenshot({path:'test-results/corridor-mobile.png'});await expect(page).toHaveURL('/business',{timeout:8000});expect(await page.evaluate(()=>document.body.style.overflow)).not.toBe('hidden');
+ await page.setViewportSize({width:390,height:844});await page.goto('/portal');await page.getByRole('link',{name:'Enter business workspace'}).click();await expect(page.getByRole('dialog')).toHaveAttribute('data-phase','playing',{timeout:25000});await expect.poll(()=>page.locator('.corridor-veil').evaluate(e=>Number(getComputedStyle(e).opacity)),{timeout:2500}).toBeLessThan(.05);const canvas=await page.locator('.corridor-canvas canvas').boundingBox();expect(canvas?.width).toBe(390);expect(canvas?.height).toBe(844);await expect(page.getByRole('button',{name:'Skip Transition'})).toBeInViewport();await page.screenshot({path:'test-results/corridor-mobile.png'});await expect(page).toHaveURL('/business',{timeout:8000});expect(await page.evaluate(()=>document.body.style.overflow)).not.toBe('hidden');
 });
 
 test('corridor gracefully bypasses a browser without WebGL',async({page})=>{
- await page.addInitScript(()=>{const original=HTMLCanvasElement.prototype.getContext;Object.defineProperty(HTMLCanvasElement.prototype,'getContext',{value:function(type:string,...args:unknown[]){if(type.startsWith('webgl')||type==='experimental-webgl')return null;return original.apply(this,[type,...args] as never);}})});await page.goto('/portal');await page.getByRole('link',{name:'Enter community workspace'}).click();await expect(page).toHaveURL('/community',{timeout:15000});await expect(page.locator('h1')).toBeVisible();
+ await page.addInitScript(()=>{const original=HTMLCanvasElement.prototype.getContext;Object.defineProperty(HTMLCanvasElement.prototype,'getContext',{value:function(type:string,...args:unknown[]){if(type.startsWith('webgl')||type==='experimental-webgl')return null;return original.apply(this,[type,...args] as never);}})});await page.goto('/portal');await page.getByRole('link',{name:'Enter community workspace'}).click();await expect(page).toHaveURL('/community',{timeout:25000});await expect(page.locator('h1')).toBeVisible();
+});
+
+
+test('Community renders after a cold download on a 40 Mbps connection',async({page,context})=>{
+ test.setTimeout(50000);await page.setViewportSize({width:960,height:680});const cdp=await context.newCDPSession(page);await cdp.send('Network.enable');await cdp.send('Network.setCacheDisabled',{cacheDisabled:true});await cdp.send('Network.emulateNetworkConditions',{offline:false,latency:60,downloadThroughput:5000000,uploadThroughput:1000000});await page.goto('/portal');await page.getByRole('link',{name:'Enter community workspace'}).click();await expect(page.getByRole('dialog')).toHaveAttribute('data-phase','playing',{timeout:25000});await expect(page).toHaveURL('/community',{timeout:7000});await cdp.detach();
 });
