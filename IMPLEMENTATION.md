@@ -4,7 +4,7 @@
 
 Node 22.12+ recommended. Run `npm ci`, copy `config.example` to `.env` and fill in server-side credentials. Start `npm run server` in one terminal and `npm run dev` in another. Visit http://localhost:5173. Production: `npm run build` then `npm start` (http://127.0.0.1:3001). The Node server serves both the built frontend and API and falls back to the frontend for browser routes. Static-only hosting cannot run this backend.
 
-`/` retains the original cinematic. Its completion callback begins a one-second exit fade while the scene stays mounted, then opens `/portal`. Reduced motion skips the timeline as the original implementation did. `/community`, `/education`, `/business` share a goal → plan → dependency graph → run → result flow. Browser history and deep links work. The original models, lighting, scene components, and timeline are unchanged; the only cinematic edit is a portal link in the WebGL fallback.
+`/` retains the original cinematic. Its completion callback begins a one-second exit fade while the scene stays mounted, then opens `/portal`. Reduced motion skips the timeline as the original implementation did. `/community/workflows`, `/education`, `/business` share a goal → plan → dependency graph → run → result flow. Browser history and deep links work. The original models, lighting, scene components, and timeline are unchanged; the only cinematic edit is a portal link in the WebGL fallback.
 
 ## Deploy to Maritime
 
@@ -12,10 +12,17 @@ The root `Dockerfile` builds the frontend and serves it with the API on Maritime
 
 ```sh
 maritime create seance-ai --repo https://github.com/sawwatihnin/seance-ai-hackathon --branch main
-maritime env set seance-ai GEMINI_API_KEY=<key> --reload
+maritime env set seance-ai GEMINI_API_KEY=<key> INVITE_CODE=<code> --reload
+maritime agents url visibility <agent-id> public
 ```
 
-Add `GOOGLE_MAPS_API_KEY` the same way for live Community places. Never put keys in the repository or the image. The agent stays private by default. Only run `maritime agents url visibility <agent-id> public` (verified email required) once invite-code access exists, because the app has no access control yet and anyone with the URL could spend the Gemini quota. `vercel.json` serves only the static frontend, so the API does not work there.
+Add `GOOGLE_MAPS_API_KEY` the same way for live Community places. Never put keys in the repository or the image. Set `INVITE_CODE` before making the URL public (verified email required); a hosted server without one generates a code and prints it to its logs. `MARITIME_API_KEY` belongs on your own machine for deploying, and is only needed on the agent if you use Maritime task execution. `vercel.json` serves only the static frontend, so the API does not work there.
+
+## Shared workspace
+
+`/community` is one ChatGPT-style chat shared by everyone on the deployment. People join with a display name and the invite code, or an invite link (`/community?invite=<code>`), and a 30-day httpOnly cookie keeps them signed in. When an invite code applies, every API route except health, session, join, and the Arduino device route needs that session, including the agent workflow pages. Without `INVITE_CODE`, a localhost server skips the code but still asks for a name.
+
+Each reply sees the last 40 messages with their authors, plus the shared facts. The model also returns durable facts such as budgets, dates, and decisions, which appear in the Shared context panel for everyone. State lives in `DATA_DIR/workspace.state` and survives restarts. Clients poll every 1.5 seconds. There is one workspace per deployment, names are unique but not passwords, and anyone with the code can post under a new name. To reset the demo, stop the server and delete `workspace.state`. The plan-and-run page moved to `/community/workflows`.
 
 ## Required artwork
 
@@ -57,4 +64,4 @@ This is a single-user localhost application, without authentication, team collab
 
 ## Verification results in this checkout
 
-Production TypeScript/build passed; Vite reports large bundles. Seventeen engine/export/Maritime client tests passed. Fourteen production browser checks passed, including the corridor and portal suites, and the Docker image built and served the app locally with a separate `PORT` and `/data` volume; it has not yet run on Maritime. The original browser checks cover (routes/history/PNG navigation/mobile; missing-key API behavior; real three-model cinematic completion; graph/checklist/backend review persistence using a clearly named test fixture isolated in temporary storage; origin/credential/review guards; no-WebGL error fallback navigation). One full plan-to-completion HTTP run passed through the real server and LangGraph with Gemini responses stubbed; its Open Library and OpenAlex steps used the live APIs and each returned six records. With a real Gemini key, a Community run completed live in 72 seconds and Business completed in 87 seconds. Live Gemma output is not fully reliable: the last three-workspace run, before the retry for invalid model output was added, saw Education and Community fail on invalid responses, and the root cause is unconfirmed. Education has not been rerun since, and a failed run must be replanned. Maritime, Places, YouTube and Brave live execution remain unverified without credentials; Arduino is unverified without hardware.
+Production TypeScript/build passed; Vite reports large bundles. Twenty-six engine/export/room/Maritime client tests passed. Eighteen production browser checks passed, including the chat, corridor, and portal suites, and the Docker image built and served the app locally with a separate `PORT` and `/data` volume; it has not yet run on Maritime. A live two-person browser test on Gemma, before the final styling fixes, confirmed that a second person received answers using the first person's facts, in about 4 seconds per reply. The original browser checks cover (routes/history/PNG navigation/mobile; missing-key API behavior; real three-model cinematic completion; graph/checklist/backend review persistence using a clearly named test fixture isolated in temporary storage; origin/credential/review guards; no-WebGL error fallback navigation). One full plan-to-completion HTTP run passed through the real server and LangGraph with Gemini responses stubbed; its Open Library and OpenAlex steps used the live APIs and each returned six records. With a real Gemini key, a Community run completed live in 72 seconds and Business completed in 87 seconds. Live Gemma output is not fully reliable: the last three-workspace run, before the retry for invalid model output was added, saw Education and Community fail on invalid responses, and the root cause is unconfirmed. Education has not been rerun since, and a failed run must be replanned. Maritime, Places, YouTube and Brave live execution remain unverified without credentials; Arduino is unverified without hardware.

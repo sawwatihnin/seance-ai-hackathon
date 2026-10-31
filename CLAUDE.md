@@ -6,13 +6,13 @@ An open source shared AI workspace. Today, teammates each work in their own Chat
 
 ## Current focus
 
-- **Community is the hackathon demo.** All three workspaces stay in the app with the shared Midnight theme and corridor transitions, but the demo only enters Community, so put demo work there.
+- **Community is the hackathon demo.** Its page is a single dark green shared chat. Education and Business stay in the app with the Midnight theme and corridor transitions, but the demo only enters Community, so put demo work there.
 - **Demo goal:** several signed-in people join one Community workspace through an invite code and see the same plans, results, and context.
 - **Model:** Gemma 4 (`gemma-4-26b-a4b-it`) through the Gemini API, for the hackathon only.
 
 ## Shared workspace status
 
-Not built yet. The app is currently single-user and runs on localhost, with no accounts, sessions, workspaces, or invites.
+Built: `/community` is one shared chat for each deployment, with invite-code sessions and a Shared context panel. See `server/room.mjs`, `src/platform/Chat.tsx`, and the Shared workspace section of `IMPLEMENTATION.md`. Accounts, passwords, and multiple workspaces are not built.
 
 Maritime is the intended host, and the root `Dockerfile` is ready for it. `server/maritime.mjs` is separate: it only sends individual tasks to an existing agent, and has never run against a real one.
 
@@ -22,13 +22,13 @@ What Maritime provides (from https://maritime.sh/docs, checked 2026-10-31):
 - A persistent `/data` volume for each agent, encrypted env vars, and sleep and wake. Timers do not fire while an agent sleeps.
 - End users keyed by an ID we supply, with per-user agents, tokens, and share links.
 
-What it does not document, so we must build it:
+What it does not document, so we built or must build it:
 
 - End-user sign-in, teams, members, roles, and invite codes.
 - Shared context across people or agents. Each end user gets a separate agent, and agents do not share a volume.
 - A database. Bring your own.
 
-Planned approach: deploy this app as one shared Maritime agent, with workspace state in `/data`, and put our own invite codes and sessions in front of it. Add access control before making the URL public, because anyone who can reach it can spend the Gemini quota. See `IMPLEMENTATION.md` for deployment steps. `vercel.json` only hosts the static frontend, so the API does not work there.
+Approach: deploy this app as one shared Maritime agent, with workspace state in `/data` and our own invite codes and sessions in front of it. Set `INVITE_CODE` before making the URL public, because the code is what protects the Gemini quota. See `IMPLEMENTATION.md` for deployment steps. `vercel.json` only hosts the static frontend, so the API does not work there.
 
 ## Future scope
 

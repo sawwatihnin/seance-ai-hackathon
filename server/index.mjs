@@ -9,12 +9,22 @@ import {restrictPlan,validatePlan} from './schema.mjs';
 import {createEngine} from './engine.mjs';
 import {exportMarkdown} from './export.mjs';
 import {maritimeConfigured} from './maritime.mjs';
+import {createRoom} from './room.mjs';
 const app=express(),runs=new Map(),dir=resolve(process.env.DATA_DIR||'.seance-data');mkdirSync(dir,{recursive:true});
 function save(run){run.revision=(run.revision||0)+1;const file=resolve(dir,run.id+'.json');writeFileSync(file+'.tmp',JSON.stringify(run,null,2));renameSync(file+'.tmp',file);}
 function event(run,message){run.activity.push({at:new Date().toISOString(),message});}
 for(const file of readdirSync(dir).filter(f=>f.endsWith('.json'))){try{const r=JSON.parse(readFileSync(resolve(dir,file),'utf8'));if(r.status==='Running'){r.status='Stopped';for(const t of r.tasks)if(['Running','Waiting'].includes(t.status)){t.status='Stopped';t.error='Server restarted; remote execution may still be running. Review before starting a new run.';}event(r,'Server restarted; workflow stopped for review');save(r);}runs.set(r.id,r);}catch{console.error('Could not recover run file',file);}}
 app.use(express.json({limit:'64kb'}));
 app.use('/api',(req,res,next)=>{const origin=req.get('origin');let originHost='';try{originHost=origin?new URL(origin).host:''}catch{}if(origin&&originHost!==(req.get('x-forwarded-host')||req.get('host'))&&origin!==`http://localhost:${process.env.FRONTEND_PORT||5173}`&&origin!==`http://127.0.0.1:${process.env.FRONTEND_PORT||5173}`)return res.status(403).json({error:'Origin not allowed'});next();});
+const room=createRoom({dir,model:gemma,inviteCode:(process.env.INVITE_CODE||'').trim(),hosted:!['127.0.0.1','localhost','::1'].includes(process.env.HOST||'127.0.0.1')});
+if(room.generatedInvite)console.log('Generated invite code:',room.generatedInvite);
+const sessionToken=req=>req.get('cookie')?.match(/(?:^|;\s*)seance_session=([a-f0-9]{64})/)?.[1];
+const signedIn=req=>{if(!req.member)throw Object.assign(Error('Join the workspace first'),{status:401});return req.member;};
+app.use('/api',(req,res,next)=>{req.member=room.member(sessionToken(req));if(room.gated&&!req.member&&!['/health','/session','/join','/device'].includes(req.path))return res.status(401).json({error:'Join the workspace first'});next();});
+app.get('/api/session',(req,res)=>res.json({workspace:room.name,inviteRequired:room.gated,member:req.member?{id:req.member.id,name:req.member.name}:null}));
+app.post('/api/join',(req,res)=>{const{token,member}=room.join(req.body||{});res.cookie('seance_session',token,{httpOnly:true,sameSite:'lax',secure:req.get('x-forwarded-proto')==='https',maxAge:2592000000});res.status(201).json(member);});
+app.get('/api/workspace',(req,res)=>res.json(room.view(signedIn(req),Math.max(0,Number(req.query.after)||0))));
+app.post('/api/messages',(req,res)=>res.status(202).json(room.post(signedIn(req),req.body?.text)));
 const goalSchema=z.object({goal:z.string().trim().min(8).max(3000),workspace:z.enum(['community','education','business']),execution:z.enum(['local','maritime']).default('local')});
 const get=(id)=>{const r=runs.get(id);if(!r){const e=Error('Workflow not found');e.status=404;throw e;}return r;};
 const runGraph=createEngine({save,event});
